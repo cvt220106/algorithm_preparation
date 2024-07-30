@@ -4,6 +4,8 @@ project(MyAlgorithmPreparation)
 
 set(CMAKE_CXX_STANDARD 17)
 
+include_directories(./dp/otherDP)
+
 # Function to add executables for each .cpp file in a directory
 function(add_executables_from_directory dir)
     file(GLOB_RECURSE cpp_files "${dir}/*.cpp")

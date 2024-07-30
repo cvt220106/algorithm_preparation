@@ -14,9 +14,7 @@
 // 所有dp数组中元素的最大值
 
 
-#include <iostream>
-#include <vector>
-#include <algorithm>
+#include <bits/stdc++.h>
 using namespace std;
 
 class Solution {
@@ -24,8 +22,8 @@ public:
     int lengthOfLIS(vector<int>& nums) {
         int result = 1;
         int n = nums.size();
-        vector<int> dp(n , 1);
-        
+        vector<int> dp(n, 1);
+
         for (int i = 1; i < n; i++) {
             for (int j = 0; j < i; j++) {
                 if (nums[i] > nums[j]) {
@@ -36,5 +34,26 @@ public:
         }
 
         return result;
+    }
+
+    // 二分查找
+    int lengthOfLIS2(vector<int>& nums) {
+        int dp[2505];
+        int n = nums.size();
+        if (n == 1) {
+            return 1;
+        }
+        fill(dp, dp + 2505, INT_MAX);
+        int mx = dp[0];
+        for (int num : nums) {
+            *lower_bound(dp, dp + n, num) = num;
+        }
+
+        int res = 0;
+        while (mx != dp[res]) {
+            res++;
+        }
+
+        return res;
     }
 };
