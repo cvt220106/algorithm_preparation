@@ -28,9 +28,10 @@ void encodeVarint(uint32_t value, vector<uint8_t>& output) {
     output.push_back(value & 0x7F);
 }
 
-uint32_t decodeVarint(const vector<uint8_t>& input, size_t& offset) {
+uint32_t decodeVarint(const vector<uint8_t>& input) {
     uint32_t result = 0;
     int shift = 0;
+    size_t offset = 0;
     while (offset < input.size()) {
         uint8_t byte = input[offset++];
         result |= (byte & 0x7F) << shift;
@@ -42,20 +43,36 @@ uint32_t decodeVarint(const vector<uint8_t>& input, size_t& offset) {
     return result;
 }
 
+char convert(int num) {
+    return (num < 10) ? ('0' + num) : ('A' + (num - 10));
+}
+
 int main() {
     vector<uint8_t> encoded;
-    uint32_t number = 300;
+    uint32_t number = 204416;
 
     encodeVarint(number, encoded);
 
-    size_t offset = 0;
-    uint32_t decoded = decodeVarint(encoded, offset);
-
     cout << "Original: " << number << "\n";
     cout << "Encoded: ";
+    stringstream output;
     for (uint8_t byte : encoded) {
-        cout << hex << (int)byte << " ";
+        output << "0X";
+        output << convert(byte / 16) << convert(byte % 16);
     }
+    cout << output.str();
+
+    vector<uint8_t> nums;
+    std::string hexString = "0x80XBD0X8C";
+    stringstream ss(hexString.substr(2, hexString.size() - 2));
+    string num;
+    while (getline(ss, num, 'X')) {
+        num = num.substr(0, 2);
+        nums.push_back(static_cast<uint8_t>(stoi(num, nullptr, 16)));
+    }
+
+    uint32_t decoded = decodeVarint(nums);
+
     cout << "\nDecoded: " << decoded << "\n";
 
     return 0;
