@@ -2,7 +2,6 @@
 // Created by jacky on 24-7-29.
 //
 #include <bits/stdc++.h>
-#include <SegementTree.h>
 using namespace std;
 
 class Solution {
