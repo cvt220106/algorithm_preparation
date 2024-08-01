@@ -37,6 +37,10 @@ public:
     }
 
     // 二分查找
+    // dp[i]表示长度为i + 1的最长递增子序列的末尾元素最小值
+    // 如果是单调不减，包含大于等于的情况，使用upper_bound
+    // 如果是单调增，只包含大于的情况，使用lower_bound，这样相同的元素，不会计入两次序列长度
+    // 而是进行覆盖！
     int lengthOfLIS2(vector<int>& nums) {
         int dp[2505];
         int n = nums.size();

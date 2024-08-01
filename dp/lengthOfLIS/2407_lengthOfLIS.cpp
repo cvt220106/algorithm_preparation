@@ -113,9 +113,19 @@ public:
     }
 };
 
+void f(void*) { cout << 0 << endl; }
+void f(int) { cout << 1 << endl; }
+void f(long) { cout << 2 << endl; }
+
 int main() {
     vector<int> v = {4, 2, 1, 4, 3, 4, 5, 8, 15};
     cout << Solution().lengthOfLIS(v, 3) << endl;
     cout << Solution2().lengthOfLIS(v, 3) << endl;
+    f(nullptr);
+    f(NULL);
+    cout << typeid(nullptr).hash_code() << endl;
+    cout << typeid(nullptr_t).hash_code() << endl;
+    cout << typeid(int).hash_code() << endl;
+    cout << typeid(Solution).hash_code() << endl;
     return 0;
 }
