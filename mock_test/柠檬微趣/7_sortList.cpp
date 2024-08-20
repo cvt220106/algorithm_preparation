@@ -10,6 +10,7 @@ struct Node {
     Node(int val) : pValue(val), pNext(nullptr) {}
 };
 
+// 插入排序
 Node* sortList(Node* pHead) {
     Node* index = pHead->pNext;
     pHead->pNext = nullptr;
@@ -18,10 +19,7 @@ Node* sortList(Node* pHead) {
         Node* j = pHead;
         while (j->pNext != nullptr && j->pNext->pValue <= index->pValue) {
             j = j->pNext;
-            cout << 2 << endl;
-            sleep(10);
         }
-        cout << 1 << endl;
         index->pNext = j->pNext;
         j->pNext = index;
         index = next;
