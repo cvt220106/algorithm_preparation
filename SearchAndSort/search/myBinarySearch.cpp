@@ -33,7 +33,7 @@ bool myBinarySearch(vector<int>& nums, int value) {
         if (nums[mid] == value) {
             return true;
         } else if (nums[mid] > value) {
-            right = mid - 1;
+            right = mid;
         } else {
             left = mid + 1;
         }
